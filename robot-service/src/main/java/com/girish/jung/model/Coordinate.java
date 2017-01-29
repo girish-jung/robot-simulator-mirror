@@ -7,25 +7,46 @@ public class Coordinate {
 
     public static enum Direction {
         EAST, WEST, NORTH, SOUTH;
+
+        public static Direction getDirectionFromString(String f) {
+            switch (f.trim().toUpperCase()) {
+                case "EAST":
+                    return EAST;
+                case "WEST":
+                    return WEST;
+                case "NORTH":
+                    return NORTH;
+                case "SOUTH":
+                    return SOUTH;
+                default:
+                    return null;
+            }
+        }
     }
 
-    private int x;
-    private int y;
+    private Integer x;
+    private Integer y;
     private Direction direction;
 
-    public int getX() {
+    public Coordinate(Integer x, Integer y, Direction direction) {
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+    }
+
+    public Integer getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(Integer x) {
         this.x = x;
     }
 
-    public int getY() {
+    public Integer getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(Integer y) {
         this.y = y;
     }
 

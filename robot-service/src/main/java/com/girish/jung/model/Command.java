@@ -12,6 +12,15 @@ public class Command {
     private Coordinate coordinate;
     private ActionType actionType;
 
+    public Command(ActionType actionType) {
+        this.actionType = actionType;
+    }
+
+    public Command(ActionType actionType, Coordinate coordinate) {
+        this.coordinate = coordinate;
+        this.actionType = actionType;
+    }
+
     public Coordinate getCoordinate() {
         return coordinate;
     }

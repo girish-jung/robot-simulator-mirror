@@ -35,16 +35,6 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
-        <!-- ******************* SPRING DEPS ******************** -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
         <!-- ******************* LOGGER DEPS ************************ -->
         <dependency>
             <groupId>org.slf4j</groupId>
