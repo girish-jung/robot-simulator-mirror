@@ -3,7 +3,7 @@ package com.girish.jung.model;
 /**
  * Created by girishjung on 1/29/17.
  */
-public class Coordinates {
+public class Coordinate {
 
     public static enum Direction {
         EAST, WEST, NORTH, SOUTH;
