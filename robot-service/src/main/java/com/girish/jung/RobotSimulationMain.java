@@ -24,7 +24,7 @@ public class RobotSimulationMain {
         File commandFile = commandFileReader.getFile(filePath);
         Coordinate finalPosition = commandFileReader.readFileAndExecuteCommand(commandFile);
         if (finalPosition != null) {
-            System.out.println("\nFinal coordinate of the robot after file processing " + finalPosition);
+            System.out.println("Final coordinate of the robot after file processing " + finalPosition + "\n");
         }
         System.out.println("Finished processing Robot simulator.");
     }

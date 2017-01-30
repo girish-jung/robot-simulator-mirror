@@ -24,7 +24,7 @@ public class RobotServiceImpl implements RobotService {
         if (robot != null && command != null && command.getActionType() != null) {
 
             if (!robot.isActive() && command.getActionType() != ActionType.PLACE) {
-                System.out.println("\nIGNORING COMMAND: Robot is not yet placed on the board. Command " + command.toString());
+                System.out.println("IGNORING COMMAND: Robot is not yet placed on the board. Command Ignored: " + command.toString() + "\n");
                 return robot.getPosition();
             }
 
@@ -35,13 +35,13 @@ public class RobotServiceImpl implements RobotService {
                         robot.setPosition(new Coordinate(command.getCoordinate().getX(), command.getCoordinate().getY(), command.getCoordinate().getDirection()));
                         robot.setActive(Boolean.TRUE);
                     } else {
-                        System.out.println("\nIGNORING COMMAND: Invalid coordinate. Command:" + command.toString());
+                        System.out.println("IGNORING COMMAND: Invalid coordinate. Command Ignored:" + command.toString() + "\n");
                     }
                     break;
 
                 case MOVE:
                     if (!robot.moveForward()) {
-                        System.out.println("\nIGNORING COMMAND: Robot cannot go outside 5X5 grid. Command : " + command.toString());
+                        System.out.println("IGNORING COMMAND: Robot cannot go outside 5X5 grid. Command Ignored: " + command.toString() + "\n");
                     }
                     break;
 
@@ -54,7 +54,7 @@ public class RobotServiceImpl implements RobotService {
                     break;
 
                 case REPORT:
-                    System.out.println("\n" + robot.getPosition());
+                    System.out.println(robot.getPosition() + "\n");
                     break;
             }
         }

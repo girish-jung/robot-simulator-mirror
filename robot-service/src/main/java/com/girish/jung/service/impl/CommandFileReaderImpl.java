@@ -57,7 +57,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
     public Coordinate readFileAndExecuteCommand(File file) throws Exception {
         if (file == null || !file.exists()) {
-            System.out.println("Invalid command file. Aborting");
+            System.out.println("Invalid command file. Aborting \n");
             throw new Exception("Invalid command file");
         }
 
@@ -74,7 +74,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
             }
 
         } catch (Exception e) {
-            System.out.println("Error while processing the file: " + file.getName());
+            System.out.println("Error while processing the file: " + file.getName() + "\n");
             throw e;
 
         } finally {
@@ -87,7 +87,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
     public Command createCommand(String line) {
         if (StringUtils.isBlank(line)) {
-            System.out.println("Invalid command. Command cannot be blank");
+            System.out.println("Invalid command. Command cannot be blank \n");
             return null;
         }
 
@@ -99,7 +99,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
                 String[] temp = lineUpperCase.split(" ", 2);
 
                 if (temp.length != 2) {
-                    System.out.println("Invalid command line");
+                    System.out.println("Invalid command line \n");
                     return null;
                 }
 
@@ -107,7 +107,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
                 ActionType actionType = ActionType.getActionTypeFromString(action);
 
                 if (actionType == null) {
-                    System.out.println("Invalid command line");
+                    System.out.println("Invalid command line \n");
                     return null;
                 }
 
@@ -115,7 +115,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
                 String[] arr = str.split(",");
 
                 if (arr.length != 3) {
-                    System.out.println("Invalid command line");
+                    System.out.println("Invalid command line \n");
                     return null;
                 }
 
@@ -133,11 +133,13 @@ public class CommandFileReaderImpl implements CommandFileReader {
             ActionType actionType = ActionType.getActionTypeFromString(line);
             if (actionType != null) {
                 return new Command(actionType);
+            } else {
+                System.out.println("Invalid command line: " + line + "\n");
             }
 
         } catch (Exception e) {
-            System.out.println("Exception occurred while creating command. Command Line: " + line);
-            System.out.println("Invalid command line : " + line);
+            System.out.println("Exception occurred while creating command. Command Line: " + line + "\n");
+            System.out.println("Invalid command line : " + line + "\n");
         }
 
         return null;
