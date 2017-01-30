@@ -1,5 +1,7 @@
 package com.girish.jung.model;
 
+import com.girish.jung.service.ActionType;
+
 /**
  * Created by girishjung on 1/29/17.
  */
@@ -43,6 +45,7 @@ public class Robot {
     }
 
     public void turnRight() {
+        System.out.println("EXECUTING COMMAND:\t " + ActionType.RIGHT);
         switch(position.getDirection()) {
             case NORTH:
                 position.setDirection(Coordinate.Direction.EAST);
@@ -63,6 +66,7 @@ public class Robot {
     }
 
     public void turnLeft() {
+        System.out.println("EXECUTING COMMAND:\t " + ActionType.LEFT);
         switch(position.getDirection()) {
             case NORTH:
                 position.setDirection(Coordinate.Direction.WEST);

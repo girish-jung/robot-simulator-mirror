@@ -18,6 +18,7 @@ import java.io.File;
 public class CommandFileReaderImpl implements CommandFileReader {
 
     private static final String DEFAULT_ROBOT_ID = "rob-123";
+    public static final String SINGLE_WHITESPACE = " ";
 
     private RobotService robotService;
 
@@ -35,7 +36,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
     public File getFile(String filePath) throws Exception {
 
-        System.out.println("Reading file " + filePath);
+        System.out.println("Reading file " + filePath + "\n");
 
         File file = null;
         try {
@@ -57,7 +58,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
     public Coordinate readFileAndExecuteCommand(File file) throws Exception {
         if (file == null || !file.exists()) {
-            System.out.println("Invalid command file. Aborting \n");
+            System.out.println("Invalid command file. Aborting");
             throw new Exception("Invalid command file");
         }
 
@@ -74,7 +75,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
             }
 
         } catch (Exception e) {
-            System.out.println("Error while processing the file: " + file.getName() + "\n");
+            System.out.println("Error while processing the file: " + file.getName());
             throw e;
 
         } finally {
@@ -87,7 +88,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
     public Command createCommand(String line) {
         if (StringUtils.isBlank(line)) {
-            System.out.println("Invalid command. Command cannot be blank \n");
+            System.out.println("INVALID COMMAND:\t Command cannot be blank");
             return null;
         }
 
@@ -96,27 +97,24 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
             // If clause to create a PLACE command
             if (lineUpperCase.startsWith(ActionType.PLACE.toString())) {
-                String[] temp = lineUpperCase.split(" ", 2);
+                String[] temp = lineUpperCase.split(SINGLE_WHITESPACE, 2);
 
                 if (temp.length != 2) {
-                    System.out.println("Invalid command line \n");
-                    return null;
+                    throw new Exception();
                 }
 
                 String action = temp[0];
                 ActionType actionType = ActionType.getActionTypeFromString(action);
 
                 if (actionType == null) {
-                    System.out.println("Invalid command line \n");
-                    return null;
+                    throw new Exception();
                 }
 
                 String str = temp[1];
                 String[] arr = str.split(",");
 
                 if (arr.length != 3) {
-                    System.out.println("Invalid command line \n");
-                    return null;
+                    throw new Exception();
                 }
 
                 Integer x = Integer.parseInt(arr[0].trim());
@@ -131,15 +129,15 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
             // Creates all other commands - MOVE, RIGHT, LEFT, REPORT
             ActionType actionType = ActionType.getActionTypeFromString(line);
-            if (actionType != null) {
-                return new Command(actionType);
-            } else {
-                System.out.println("Invalid command line: " + line + "\n");
+
+            if (actionType == null) {
+                throw new Exception();
             }
 
+            return new Command(actionType);
+
         } catch (Exception e) {
-            System.out.println("Exception occurred while creating command. Command Line: " + line + "\n");
-            System.out.println("Invalid command line : " + line + "\n");
+            System.out.println("INVALID COMMAND:\t " + line);
         }
 
         return null;

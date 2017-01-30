@@ -11,17 +11,9 @@ left
 move
 move
 move
-PLACE 1,2,EASTERN
 move
-PLACE 1,ASDF, EAST
-MOVE
-PLACE 1,2,3, EAST
-
 report
-123wweqr
-
-PLACE 1,2, EAST
-move123
+PLACE 1,2,EAST
 MOVE
 MOVE
 PLACE 3,5,SOUTH
