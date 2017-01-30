@@ -12,7 +12,7 @@ import java.io.File;
  */
 public class RobotSimulationMain {
 
-    private static final String DEFAULT_FILE_PATH = "robot-service/src/main/resources/data/command.txt";
+    private static final String DEFAULT_FILE_PATH = "/data/command.txt";
 
     public static void main(String[] args) throws Exception {
         System.out.println("Starting Robot simulator...");
@@ -35,6 +35,6 @@ public class RobotSimulationMain {
         if (args.length > 0) {
             return args[0];
         }
-        return DEFAULT_FILE_PATH;
+        return RobotSimulationMain.class.getResource(DEFAULT_FILE_PATH).getPath();
     }
 }
