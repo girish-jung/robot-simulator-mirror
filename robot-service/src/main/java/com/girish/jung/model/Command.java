@@ -36,4 +36,12 @@ public class Command {
     public void setActionType(ActionType actionType) {
         this.actionType = actionType;
     }
+
+    @Override
+    public String toString() {
+        if (coordinate != null) {
+            return actionType + " " + coordinate.toString();
+        }
+        return actionType.toString();
+    }
 }

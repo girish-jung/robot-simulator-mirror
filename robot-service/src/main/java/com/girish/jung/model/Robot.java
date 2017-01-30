@@ -41,4 +41,77 @@ public class Robot {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public void turnRight() {
+        switch(position.getDirection()) {
+            case NORTH:
+                position.setDirection(Coordinate.Direction.EAST);
+                break;
+
+            case SOUTH:
+                position.setDirection(Coordinate.Direction.WEST);
+                break;
+
+            case EAST:
+                position.setDirection(Coordinate.Direction.SOUTH);
+                break;
+
+            case WEST:
+                position.setDirection(Coordinate.Direction.NORTH);
+                break;
+        }
+    }
+
+    public void turnLeft() {
+        switch(position.getDirection()) {
+            case NORTH:
+                position.setDirection(Coordinate.Direction.WEST);
+                break;
+
+            case SOUTH:
+                position.setDirection(Coordinate.Direction.EAST);
+                break;
+
+            case EAST:
+                position.setDirection(Coordinate.Direction.NORTH);
+                break;
+
+            case WEST:
+                position.setDirection(Coordinate.Direction.SOUTH);
+                break;
+        }
+    }
+
+    public boolean moveForward() {
+        switch (position.getDirection()) {
+            case NORTH:
+                if (position.getY() < 4) {
+                    position.setY(position.getY() + 1);
+                    return true;
+                }
+                break;
+
+            case SOUTH:
+                if (position.getY() > 0) {
+                    position.setY(position.getY() - 1);
+                    return true;
+                }
+                break;
+
+            case EAST:
+                if (position.getX() < 4) {
+                    position.setX(position.getX() + 1);
+                    return true;
+                }
+                break;
+
+            case WEST:
+                if (position.getX() > 0) {
+                    position.setX(position.getX() - 1);
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
 }

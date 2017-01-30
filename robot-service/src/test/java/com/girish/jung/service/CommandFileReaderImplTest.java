@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.internal.exceptions.ExceptionIncludingMockitoWarnings;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
@@ -19,13 +18,12 @@ import java.io.File;
 @RunWith(MockitoJUnitRunner.class)
 public class CommandFileReaderImplTest {
 
-    private CommandFileReaderImpl commandFileReader;
+    private CommandFileReader commandFileReader;
 
     @Before
     public void setUp() {
         RobotService robotService = new RobotServiceImpl();
-        commandFileReader = new CommandFileReaderImpl();
-        commandFileReader.setRobotService(robotService);
+        commandFileReader = new CommandFileReaderImpl(robotService);
     }
 
     @Test

@@ -57,4 +57,9 @@ public class Coordinate {
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
+
+    @Override
+    public String toString() {
+        return x + "," + y + "," + direction;
+    }
 }

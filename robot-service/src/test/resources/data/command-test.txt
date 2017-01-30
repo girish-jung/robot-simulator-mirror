@@ -1,6 +1,22 @@
+right
+ MOVE
+PLACE 3, 4, north
+report
+move
+left
+move
+move
+move
+left
+move
+move
+move
+move
+report
 PLACE 1,2,EAST
 MOVE
 MOVE
+PLACE 3,5,SOUTH
 LEFT
 MOVE
 REPORT

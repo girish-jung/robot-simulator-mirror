@@ -11,5 +11,6 @@ public interface RobotService {
 
     public Robot findRobotById(String robotId);
 
-    public Coordinate executeCommand(String robotId, Command command);
+    public Coordinate executeCommand(Robot robot, Command command);
+
 }

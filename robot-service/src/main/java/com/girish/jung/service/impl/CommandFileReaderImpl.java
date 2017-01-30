@@ -9,8 +9,6 @@ import com.girish.jung.service.RobotService;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -19,10 +17,13 @@ import java.io.File;
  */
 public class CommandFileReaderImpl implements CommandFileReader {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommandFileReaderImpl.class);
     private static final String DEFAULT_ROBOT_ID = "rob-123";
 
     private RobotService robotService;
+
+    public CommandFileReaderImpl(RobotService robotService) {
+        this.robotService = robotService;
+    }
 
     public RobotService getRobotService() {
         return robotService;
@@ -34,7 +35,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
     public File getFile(String filePath) throws Exception {
 
-        LOGGER.debug("Reading file {}", filePath);
+        System.out.println("Reading file " + filePath);
 
         File file = null;
         try {
@@ -42,12 +43,12 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
             if (!file.exists()) {
                 String msg = "No file exists at location: " + file.getAbsolutePath();
-                LOGGER.error(msg);
+                System.out.println(msg);
                 throw new Exception(msg);
             }
 
         } catch (Exception e) {
-            LOGGER.error("Error while reading the file", e);
+            System.out.println("Error while reading the file");
             throw e;
         }
 
@@ -56,24 +57,24 @@ public class CommandFileReaderImpl implements CommandFileReader {
 
     public Coordinate readFileAndExecuteCommand(File file) throws Exception {
         if (file == null || !file.exists()) {
-            LOGGER.error("Invalid command file. Aborting");
+            System.out.println("Invalid command file. Aborting");
             throw new Exception("Invalid command file");
         }
 
         LineIterator lineIterator = null;
-        Coordinate finalCoordinate = null;
+        Robot robot = robotService.findRobotById(DEFAULT_ROBOT_ID);
         try {
 
             lineIterator = FileUtils.lineIterator(file, "UTF-8");
             while (lineIterator.hasNext()) {
                 String line = lineIterator.nextLine().trim();
                 Command command = createCommand(line);
-                finalCoordinate = robotService.executeCommand(DEFAULT_ROBOT_ID, command);
+
+                robotService.executeCommand(robot, command);
             }
 
         } catch (Exception e) {
-            String msg = "Error while processing the file: " + file.getName();
-            LOGGER.error(msg, e);
+            System.out.println("Error while processing the file: " + file.getName());
             throw e;
 
         } finally {
@@ -81,12 +82,11 @@ public class CommandFileReaderImpl implements CommandFileReader {
                 LineIterator.closeQuietly(lineIterator);
             }
         }
-        return finalCoordinate;
+        return robot.getPosition();
     }
 
     public Command createCommand(String line) {
         if (StringUtils.isBlank(line)) {
-            LOGGER.error("Invalid command");
             System.out.println("Invalid command. Command cannot be blank");
             return null;
         }
@@ -136,7 +136,7 @@ public class CommandFileReaderImpl implements CommandFileReader {
             }
 
         } catch (Exception e) {
-            LOGGER.error("Exception occurred while creating command. Command Line: " + line, e);
+            System.out.println("Exception occurred while creating command. Command Line: " + line);
             System.out.println("Invalid command line : " + line);
         }
 
