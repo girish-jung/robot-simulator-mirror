@@ -38,7 +38,7 @@
         <skipCompression>false</skipCompression>
 
         <!-- Spring Dependencies -->
-        <version.spring>4.3.4.RELEASE</version.spring>
+        <version.spring>5.2.6.RELEASE</version.spring>
     </properties>
 
     <dependencyManagement>
